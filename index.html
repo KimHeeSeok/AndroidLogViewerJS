@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+
+    <!-- You MUST include jQuery before Fomantic -->
+    <!-- <link rel="stylesheet" type="text/css" href="./myfont.css"> -->
+    <script src="./dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./dist/semantic/semantic.css">
+    <script src="./dist/semantic/semantic.js"></script>
+
+    <title>Android Log Viewer</title>
+  </head>
+  <body>
+    <h1>Android Log Viewer!</h1>
+    Using Node.js <span id="node-version"></span>,
+    Chromium <span id="chrome-version"></span>,
+    Electron <span id="electron-version"></span>.
+
+    <p></p>
+
+    <div class="ui form segment">
+
+      <div class="ui grid">
+        <div class="three wide column">
+          <div class="ui segment">
+            <div class="field">
+              <label>Devices list</label>
+              <select name="skills" size="4" class="dropdown" >
+                <option value="html">AAA</option>
+                <option value="javascript">BBB</option>
+                <option value="design">CDEFDF</option>
+                <option value="plumbing">DGDGDEEFE</option>
+                <option value="mech">SDF1DFJF4T</option>
+                <option value="repair">SDFJIH37823HJF</option>
+                <option value="design">SDDF23F23</option>
+                <option value="plumbing">SDF2345G2</option>
+                <option value="mech">JKL5HJM56</option>
+                <option value="repair">FFJIH37823HJF</option>
+              </select>
+            </div>
+            <button class="ui button">Get devices</button>
+          </div>
+        </div>
+
+        <div class="ten wide column">
+          <div class="ui segment">
+            <div class="field">
+              <label>Process</label>
+              <select class="ui fluid search dropdown" multiple="">
+                <option value="">Select processes</option>
+                <option value="javascript">smart</option>
+                <option value="design">scanner</option>
+                <option value="plumbing">capture</option>
+                <option value="mech">engineering</option>
+                <option value="repair">active</option>
+                <option value="css123">tab.active.pro</option>
+                <option value="m123ech">eng435ineering</option>
+                <option value="r23epair">acti453ve</option>
+                <option value="c345ss">tab.ac345tive.pro</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="three wide column">
+          <div class="ui segment"> 
+            <div class="field">
+              <label for="colors">Log level</label>
+              <div class="two fields">
+                <div class="field">
+                    <div class="ui checkbox"><input type="checkbox" name="verbose"><label>Verbose</label></div>
+                    <div class="ui checkbox"><input type="checkbox" name="debug"><label>Debug</label></div>
+                    <div class="ui checkbox"><input type="checkbox" name="info"><label>Info</label></div>
+                </div>
+                <div class="field">
+                    <div class="ui checkbox"><input type="checkbox" name="warn"><label>Warn</label></div>
+                    <div class="ui checkbox"><input type="checkbox" name="error"><label>Error</label></div>
+                    <div class="ui checkbox"><input type="checkbox" name="fatal"><label>Fatal</label></div>
+                </div>
+              </div>
+            </div>  
+
+          </div>
+        </div>
+
+      </div>
+
+      
+      <p>Tell Us About Yourself</p>
+
+
+      <table class="ui celled table">
+        <thead>
+        <tr>
+          <th>Line</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>LogLV</th>
+          <th>Pid</th>
+          <th>Process</th>
+          <th>Thread</th>
+          <th>Tag</th>
+          <th> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="orange">No Name Specified</td>
+          <td>Unknown</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>            
+        </tr>
+        <tr class="blue">
+          <td>Jimmy</td>
+          <td><i class="microphone icon"></i> Recording session</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>Jamie</td>
+          <td>Unknown</td>
+          <td class="pink"><i class="child icon"></i> Baby Party</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>            
+        </tr>
+        <tr>
+          <td>Jill</td>
+          <td>Unknown</td>
+          <td class="green">Vacation</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>
+          <td>None</td>            
+        </tr>
+        </tbody>
+      </table>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- You can also require other files to run in this process -->
+    <script src="./renderer.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('.ui.dropdown').dropdown();
+      });
+    </script>
+  </body>
+</html>
