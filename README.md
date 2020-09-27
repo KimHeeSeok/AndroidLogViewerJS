@@ -13,3 +13,10 @@
 ```   
 
 5. $ npm start
+
+
+<br/>
+<br/>
+<br/>
+
+![20200927. Screen shot](./etc/screenshot.png)

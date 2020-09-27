@@ -4,3 +4,9 @@
 // `nodeIntegration` is turned off. Use `preload.js` to
 // selectively enable features needed in the rendering
 // process.
+
+// In renderer process (web page).
+
+// need to set nodeIntegration true
+
+const myAdb = require('./renderer_myAdb.js')

@@ -20,6 +20,7 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "dependencies": {
+    "adbkit": "^2.11.1",
     "fomantic-ui": "^2.8.7"
   },
   "devDependencies": {

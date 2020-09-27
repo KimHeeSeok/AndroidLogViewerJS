@@ -6,11 +6,18 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
 
+    <!-- Insert this line above script imports -->
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+    <!-- normal script imports etc  -->
     <!-- You MUST include jQuery before Fomantic -->
     <!-- <link rel="stylesheet" type="text/css" href="./myfont.css"> -->
     <script src="./dist/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./dist/semantic/semantic.css">
     <script src="./dist/semantic/semantic.js"></script>
+
+    <!-- Insert this line after script imports -->
+    <script>if (window.module) module = window.module;</script>
 
     <title>Android Log Viewer</title>
   </head>
@@ -29,20 +36,15 @@
           <div class="ui segment">
             <div class="field">
               <label>Devices list</label>
-              <select name="skills" size="4" class="dropdown" >
+              <select size="4" class="dropdown" id="devices" >
                 <option value="html">AAA</option>
-                <option value="javascript">BBB</option>
-                <option value="design">CDEFDF</option>
-                <option value="plumbing">DGDGDEEFE</option>
-                <option value="mech">SDF1DFJF4T</option>
-                <option value="repair">SDFJIH37823HJF</option>
-                <option value="design">SDDF23F23</option>
-                <option value="plumbing">SDF2345G2</option>
-                <option value="mech">JKL5HJM56</option>
-                <option value="repair">FFJIH37823HJF</option>
+                <option value="plumbing">BBB</option>
+                <option value="mech">CCC</option>
+                <option value="repair">DDD</option>
+                <option value="repasdair">EEE</option>
               </select>
             </div>
-            <button class="ui button">Get devices</button>
+            <button class="ui button" id='btnGetDevices'>Get devices</button>
           </div>
         </div>
 
@@ -169,8 +171,28 @@
     <script src="./renderer.js"></script>
     <script>
       $(document).ready(function(){
-        $('.ui.dropdown').dropdown();
-      });
+        $('.ui.dropdown').dropdown()
+
+        $("#btnGetDevices").click(function(evt){
+
+          myAdb.getDevices().then(function(arg) {
+
+            $('#devices option').remove()
+            for (var i = 0; i < arg.length; i++) {
+                var device = arg[i].valueOf(myAdb.AdbDevice)
+                // console.log('id=' + device.id + ", type="+ device.type) 
+                var optVal = device.id
+                var optText = device.id
+
+                $('<option/>').val(optVal).text(optText).appendTo('#devices')
+            }
+
+          }).catch(function(err) {
+            console.error(err)
+          })
+        })
+      })
+
     </script>
   </body>
 </html>
