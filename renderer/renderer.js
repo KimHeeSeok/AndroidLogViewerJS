@@ -9,4 +9,6 @@
 
 // need to set nodeIntegration true
 
+const { AdbDevice, LogcatLog } = require('../model/common.js')
+
 const myAdb = require('./renderer_myAdb.js')

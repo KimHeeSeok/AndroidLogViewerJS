@@ -1,5 +1,3 @@
-const Struct = (...keys) => ((...v) => keys.reduce((o, k, i) => {o[k] = v[i]; return o} , {}))
-const AdbDevice = Struct('id', 'type')
 
 const { ipcRenderer } = require('electron')
 console.log(ipcRenderer.sendSync('synchronous-message', 'ping')) // prints "pong"
@@ -10,10 +8,18 @@ async function getDevices() {
     return new Promise(function(resolve, reject) {
 
         ipcRenderer.once('getDevicesAsync-reply', (event, arg) => {
-            resolve(arg);
+            resolve(arg)
         })
         ipcRenderer.send('getDevicesAsync', 'param_abcd')
     })
 }
+module.exports.getDevices = getDevices
 
-module.exports.getDevices = getDevices;
+function openLogcat(deviceId, callback) {
+
+    ipcRenderer.on('openLogcatAsync-reply', (event, arg) => {
+        callback(arg)
+    })
+    ipcRenderer.send('openLogcatAsync', deviceId)
+}
+module.exports.openLogcat = openLogcat

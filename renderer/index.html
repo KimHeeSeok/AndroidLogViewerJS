@@ -12,9 +12,9 @@
     <!-- normal script imports etc  -->
     <!-- You MUST include jQuery before Fomantic -->
     <!-- <link rel="stylesheet" type="text/css" href="./myfont.css"> -->
-    <script src="./dist/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="./dist/semantic/semantic.css">
-    <script src="./dist/semantic/semantic.js"></script>
+    <script src="../dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../dist/semantic/semantic.css">
+    <script src="../dist/semantic/semantic.js"></script>
 
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
@@ -95,15 +95,15 @@
       <p>Tell Us About Yourself</p>
 
 
-      <table class="ui celled table">
+      <table class="ui celled table" id="log_table">
         <thead>
         <tr>
           <th>Line</th>
           <th>Date</th>
           <th>Time</th>
           <th>LogLV</th>
+          <th>Process</th>          
           <th>Pid</th>
-          <th>Process</th>
           <th>Thread</th>
           <th>Tag</th>
           <th> </th>
@@ -169,7 +169,25 @@
 
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
-    <script>
+    <script type="text/javascript">
+
+      function appendLog(entry) {
+        var log = entry.valueOf(LogcatLog)
+        // console.log(log)
+        var tr = $('<tr/>')
+        $('<td/>').text(log.line).appendTo(tr)
+        $('<td/>').text(log.date).appendTo(tr)
+        $('<td/>').text(log.time).appendTo(tr)
+        $('<td/>').text(log.log_lv).appendTo(tr)
+        $('<td/>').text(log.process).appendTo(tr)
+        $('<td/>').text(log.pid).appendTo(tr)
+        $('<td/>').text(log.thread).appendTo(tr)
+        $('<td/>').text(log.tag).appendTo(tr)
+        $('<td/>').text(log.text).appendTo(tr)
+
+        $('#log_table tbody').append(tr)
+      }
+
       $(document).ready(function(){
         $('.ui.dropdown').dropdown()
 
@@ -185,6 +203,9 @@
                 var optText = device.id
 
                 $('<option/>').val(optVal).text(optText).appendTo('#devices')
+
+                // TODO remove
+                myAdb.openLogcat(optVal, appendLog)
             }
 
           }).catch(function(err) {
