@@ -12,7 +12,7 @@
     <!-- normal script imports etc  -->
     <!-- You MUST include jQuery before Fomantic -->
     <!-- <link rel="stylesheet" type="text/css" href="./myfont.css"> -->
-    <script src="../dist/jquery.min.js"></script>
+    <script src="./jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../dist/semantic/semantic.css">
     <script src="../dist/semantic/semantic.js"></script>
 
@@ -202,7 +202,7 @@
                 var optVal = device.id
                 var optText = device.id
 
-                $('<option/>').val(optVal).text(optText).appendTo('#devices')
+                $('<option/>').val(optVal).text('ABCDEFGHIJK').appendTo('#devices')
 
                 // TODO remove
                 myAdb.openLogcat(optVal, appendLog)
