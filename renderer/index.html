@@ -12,6 +12,7 @@
     <!-- normal script imports etc  -->
     <!-- You MUST include jQuery before Fomantic -->
     <!-- <link rel="stylesheet" type="text/css" href="./myfont.css"> -->
+    <link rel="stylesheet" type="text/css" href="./mycss.css">
     <script src="./jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../dist/semantic/semantic.css">
     <script src="../dist/semantic/semantic.js"></script>
@@ -94,8 +95,10 @@
       
       <p>Tell Us About Yourself</p>
 
+      <div class="table-wrap">
 
-      <table class="ui celled table" id="log_table">
+      <!--table class="ui celled table table-container" id="log_table"-->
+      <table class="ui celled table table-container" id="log_table">
         <thead>
         <tr>
           <th>Line</th>
@@ -106,63 +109,28 @@
           <th>Pid</th>
           <th>Thread</th>
           <th>Tag</th>
-          <th> </th>
+          <th>Text</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td class="orange">No Name Specified</td>
-          <td>Unknown</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>            
-        </tr>
         <tr class="blue">
-          <td>Jimmy</td>
-          <td><i class="microphone icon"></i> Recording session</td>
+          <td class="orange">123456</td>
+          <td>2099-12-31</td>
+          <td>23-59-59</td>
+          <td>V</td>
           <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-        </tr>
-        <tr>
-          <td>Jamie</td>
-          <td>Unknown</td>
-          <td class="pink"><i class="child icon"></i> Baby Party</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>            
-        </tr>
-        <tr>
-          <td>Jill</td>
-          <td>Unknown</td>
-          <td class="green">Vacation</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
-          <td>None</td>
+          <td>123456</td>
+          <td>123456</td>
           <td>None</td>
           <td>None</td>            
         </tr>
         </tbody>
       </table>
 
+      </div>
 
 
     </div>
-
-
-
 
 
 
@@ -171,21 +139,37 @@
     <script src="./renderer.js"></script>
     <script type="text/javascript">
 
-      function appendLog(entry) {
-        var log = entry.valueOf(LogcatLog)
-        // console.log(log)
-        var tr = $('<tr/>')
-        $('<td/>').text(log.line).appendTo(tr)
-        $('<td/>').text(log.date).appendTo(tr)
-        $('<td/>').text(log.time).appendTo(tr)
-        $('<td/>').text(log.log_lv).appendTo(tr)
-        $('<td/>').text(log.process).appendTo(tr)
-        $('<td/>').text(log.pid).appendTo(tr)
-        $('<td/>').text(log.thread).appendTo(tr)
-        $('<td/>').text(log.tag).appendTo(tr)
-        $('<td/>').text(log.text).appendTo(tr)
+      function appendLog(entries) {
 
-        $('#log_table tbody').append(tr)
+        var tbody = $('#log_table > tbody')
+        var tbodyH = tbody[0] 
+
+        var entryCount = entries.length
+        var currentCount = tbodyH.rows.length
+
+        var delCount = currentCount + entryCount - 700
+        while(currentCount-- > 0 && delCount-- > 0) {
+          tbodyH.deleteRow(0)
+          // $('tbody > tr:first-child').remove();
+        }
+
+        for(var i=0; i< entryCount; i++) {
+          var log = entries[i].valueOf(LogcatLog)
+
+          var tr = `<tr>`
+          tr += `<td>${log.line}</td>`
+          tr += `<td>${log.date}</td>`
+          tr += `<td>${log.time}</td>`
+          tr += `<td>${log.log_lv}</td>`
+          tr += `<td>${log.process}</td>`
+          tr += `<td>${log.pid}</td>`
+          tr += `<td>${log.thread}</td>`
+          tr += `<td>${log.tag}</td>`
+          tr += `<td>${log.text}</td>`
+          tr += `</tr>`
+
+          tbody.append(tr)
+        }
       }
 
       $(document).ready(function(){
@@ -197,11 +181,12 @@
 
             $('#devices option').remove()
             for (var i = 0; i < arg.length; i++) {
-                var device = arg[i].valueOf(myAdb.AdbDevice)
+                var device = arg[i].valueOf(AdbDevice)
                 // console.log('id=' + device.id + ", type="+ device.type) 
                 var optVal = device.id
                 var optText = device.id
 
+                // TODO show deviceId
                 $('<option/>').val(optVal).text('ABCDEFGHIJK').appendTo('#devices')
 
                 // TODO remove
@@ -212,7 +197,16 @@
             console.error(err)
           })
         })
+
+        $('#log_table tbody').on('scroll', function(e) {
+          var target = e.currentTarget
+          console.log(`${target.scrollTop} of ${target.scrollHeight}`)
+          console.log(`${target.scrollLeft} of ${target.scrollWidth}`)
+
+        });
       })
+
+
 
     </script>
   </body>

@@ -17,6 +17,8 @@ module.exports.getDevices = getDevices
 
 function openLogcat(deviceId, callback) {
 
+    ipcRenderer.removeAllListeners('openLogcatAsync-reply')
+
     ipcRenderer.on('openLogcatAsync-reply', (event, arg) => {
         callback(arg)
     })

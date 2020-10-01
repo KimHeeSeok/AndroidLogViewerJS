@@ -1,0 +1,137 @@
+/* .ui.table thead tr:first-child > th {
+    position: sticky !important;
+    top: 0;
+    z-index: 2;
+}
+
+.ui.table {
+    border-top: none !important; 
+}
+ 
+th, tr, thead {
+    box-sizing: border-box; 
+}
+
+td {
+    box-sizing: border-box; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+} */
+
+/*
+body {
+  overflow-x: auto !important;
+}
+
+table {
+  display: grid;
+  border-collapse: collapse;
+  min-width: 100%;
+  grid-template-columns: 
+    minmax(100px, 6.25fr)
+    minmax(100px, 150px)
+    minmax(100px, 150px)
+    minmax(50px, 50px)
+    minmax(100px, 12.5fr)
+    minmax(100px, 6.25fr)
+    minmax(100px, 6.25fr)
+    minmax(100px, 6.25fr)
+    minmax(min-content, 100fr);
+}
+  
+thead,
+tbody,
+tr {
+  display: contents;
+}
+
+th,
+td {
+  padding: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background: #6c7ae0;
+  text-align: left;
+  font-weight: normal;
+  font-size: 1.1rem;
+  color: white;
+}
+
+th:last-child {
+  border: 0;
+}
+
+td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #808080;
+}
+
+tr:nth-child(even) td {
+  background: #f8f6ff;
+} 
+*/
+
+div.table-wrap {
+  height:300px;
+  display: block;
+  overflow-x:auto;
+  overflow-y:scroll;
+}
+
+table.table-container {
+  width:100%;
+  /* display:block; */
+  border-collapse: collapse;
+  border: 1px solid black;
+  /* table-layout:fixed; */
+
+  display: grid;
+  grid-template-columns: 
+  minmax(100px, 6.25fr)
+  minmax(100px, 150px)
+  minmax(100px, 150px)
+  minmax(50px, 50px)
+  minmax(100px, 12.5fr)
+  minmax(100px, 6.25fr)
+  minmax(100px, 6.25fr)
+  minmax(100px, 6.25fr)
+  minmax(min-content, 100fr);
+}
+
+
+table.table-container thead,
+table.table-container tbody,
+table.table-container tr {
+  display: contents;
+}
+
+table.table-container tr:nth-child(even) td {
+  background: #00000010;
+} 
+
+.table-container td:not(:last-child) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  
+}
+
+
+.table-container td:last-child {
+  white-space: nowrap;
+} 
+
+/* .my.one.wide {
+    width: 6.25%;
+}
+
+.my.two.wide {
+    width: 12.50%;
+} */
